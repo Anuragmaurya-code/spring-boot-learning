@@ -1,15 +1,23 @@
 package com.codewithanurag.store;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Service
 public class OderService {
     private PaymentService paymentService;
 
     private double amount;
-    public OderService(PaymentService paymentService,double amount){
+    @Autowired
+    public OderService(@Qualifier("paypal") PaymentService paymentService){
         this.paymentService=paymentService;
-        this.amount=amount;
     }
+
+    public OderService(){}
     public void placeOrder(){
-        paymentService.processPayment(this.amount);
+        paymentService.processPayment(200);
     }
     public void setPaymentService(PaymentService paymentService) {
         this.paymentService = paymentService;
